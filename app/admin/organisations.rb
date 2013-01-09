@@ -60,11 +60,7 @@ ActiveAdmin.register Organisation do
     column :url do |organisation|
       link_to organisation.url, organisation.url
     end
-    column :repositories do |organisation|
-      content_tag :ul do
-        organisation.repositories.collect {|repository| concat(content_tag(:li, link_to(repository.name, admin_repository_path(repository))))}
-      end
-    end
+    column :repository
     default_actions
   end
   
@@ -85,11 +81,7 @@ ActiveAdmin.register Organisation do
         end
       end
       row :logo_file_size
-      row :repositories do
-        content_tag :ul do
-          organisation.repositories.collect {|repository| concat(content_tag(:li, link_to(repository.name, admin_repository_path(repository))))}
-        end
-      end
+      row :repository
       row :branded do
         organisation.branded ? I18n.t('dmp.boolean_yes') : I18n.t('dmp.boolean_no')
       end
